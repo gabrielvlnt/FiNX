@@ -1,0 +1,26 @@
+.nav {
+    background-color: black;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1020 !important;
+}
+
+.backnav {
+    background-color: black;
+}
+
+.logo{
+    background-color: black;
+    font-size: 30px !important;
+    color: white !important;
+}
+
+.links{
+    color:white !important;
+    background-color: black !important;
+}
+
+.navbutton{
+    color: black !important;
+    background-color: white !important;
+}
