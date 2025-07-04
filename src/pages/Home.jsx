@@ -1,6 +1,7 @@
 import styles from './Home.module.css'
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
+import axios from 'axios';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,98 +14,47 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
-const mockData = [
-  {
-    symbol: 'AAPL',
-    name: 'Apple',
-    price: 189.12,
-    change: 1.23,
-    history: [180, 182, 185, 187, 189, 188, 189.12],
-  },
-  {
-    symbol: 'GOOGL',
-    name: 'Google',
-    price: 2734.87,
-    change: -0.56,
-    history: [2700, 2710, 2720, 2730, 2734, 2735, 2734.87],
-  },
-  {
-    symbol: 'BTC',
-    name: 'Bitcoin',
-    price: 65000,
-    change: 2.1,
-    history: [60000, 61000, 62000, 63000, 64000, 64500, 65000],
-  },
-  {
-    symbol: 'DOGE',
-    name: 'Dogecoin',
-    price: 0.18,
-    change: 4.5,
-    history: [0.15, 0.16, 0.17, 0.18, 0.17, 0.18, 0.18],
-  },
-  {
-    symbol: 'ETH',
-    name: 'Ethereum',
-    price: 3400.55,
-    change: 1.8,
-    history: [3200, 3250, 3300, 3350, 3400, 3390, 3400.55],
-  },
-  {
-    symbol: 'NASDAQ',
-    name: 'NASDAQ',
-    price: 15500.12,
-    change: 0.9,
-    history: [15000, 15100, 15200, 15300, 15400, 15500, 15500.12],
-  },
-  {
-    symbol: 'S&P500',
-    name: 'S&P 500',
-    price: 5200.33,
-    change: 0.7,
-    history: [5000, 5050, 5100, 5150, 5180, 5200, 5200.33],
-  },
-  {
-    symbol: 'MSFT',
-    name: 'Microsoft',
-    price: 410.22,
-    change: 0.5,
-    history: [400, 402, 405, 408, 410, 409, 410.22],
-  },
-  {
-    symbol: 'AMZN',
-    name: 'Amazon',
-    price: 3700.44,
-    change: -1.2,
-    history: [3600, 3620, 3650, 3680, 3700, 3690, 3700.44],
-  },
-  {
-    symbol: 'TSLA',
-    name: 'Tesla',
-    price: 900.88,
-    change: 2.7,
-    history: [850, 860, 870, 880, 890, 900, 900.88],
-  },
-  {
-    symbol: 'SOL',
-    name: 'Solana',
-    price: 145.32,
-    change: 3.2,
-    history: [120, 125, 130, 135, 140, 143, 145.32],
-  },
-  {
-    symbol: 'EUR/USD',
-    name: 'Euro/Dólar',
-    price: 1.085,
-    change: -0.2,
-    history: [1.08, 1.09, 1.10, 1.09, 1.08, 1.085, 1.085],
-  },
-];
+const API_KEY = 'MD6LXENAIBLSO72T'
+const BASE_URL = 'https://financialmodelingprep.com/api/v3'
 
 const Home = () => {
   const [coins, setCoins] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const symbols = ['AAPL', 'GOOGL', 'BTC', 'DOGEUSD', 'MSFT', 'AMZN', 'TSLA', 'EURUSD']
+      const responses = await Promise.all(
+        symbols.map(symbol =>
+          axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${API_KEY}`)
+        )
+      )
+      const newData = responses.map((response, idx) => {
+        const data = response.data['Time Series (5min)'];
+        const times = Object.keys(data); // Últimos 7 intervalos
+        console.log(times)
+        const history = times.map(time => parseFloat(data[time]['4. close']));
+        const latest = data[times[0]];
+        const prev = data[times[1]];
+        return {
+          symbol: symbols[idx],
+          name: symbols[idx].includes('USD') ? symbols[idx].replace('USD', '') : symbols[idx],
+          price: parseFloat(latest['4. close']),
+          change: prev ? ((parseFloat(latest['4. close']) - parseFloat(prev['4. close'])) / parseFloat(prev['4. close']) * 100).toFixed(2) : '0.00',
+          history: history,
+        };
+      });
+      setCoins(newData)
+    } catch (error){
+      console.error('Erro ao buscar dados: ', error)
+    }
+  }
+
   useEffect(() => {
-    // Aqui você pode substituir pelo fetch da API real
-    setCoins(mockData);
+    fetchData()
+    const intervalId = setInterval(fetchData, 20 * 60 * 1000)
+
+    return () => clearInterval(intervalId)
+
   }, []);
 
   return (
