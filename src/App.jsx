@@ -22,7 +22,9 @@ function AppContent() {
           <Route path='/register' element={<RegisterForm/>}/>
         </Routes>
       </main>
-      <Footer/>
+      <div className={`${styles.footerapp}`}>
+        <Footer/>
+      </div>
     </div>
   );
 }

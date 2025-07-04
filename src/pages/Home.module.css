@@ -1,8 +1,168 @@
-.home{
-    background: black;
-    height: 9000px;
+.home {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #000 0%, #222 100%);
+  padding: 48px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInBg 1.2s cubic-bezier(.77,0,.18,1) both;
 }
 
-.title{
-    color: white;
+@keyframes fadeInBg {
+  from { opacity: 0; filter: blur(8px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+.title {
+  color: #fff;
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  background: linear-gradient(90deg, #fff 60%, #888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  animation: fadeInTitle 1.2s .2s cubic-bezier(.77,0,.18,1) both;
+}
+
+@keyframes fadeInTitle {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.grid {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.10) 100%);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+  padding: 32px 28px 24px 28px;
+  min-width: 320px;
+  max-width: 340px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid rgba(255,255,255,0.08);
+  animation: fadeInCard 1.1s cubic-bezier(.77,0,.18,1) both;
+  animation-name: fadeInCard, cardGradientAnim;
+  animation-duration: 1.1s, 3.5s;
+  animation-iteration-count: 1, infinite;
+  animation-timing-function: cubic-bezier(.77,0,.18,1), linear;
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(40px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cardGradientAnim {
+  0% { box-shadow: 0 8px 32px 0 rgba(255,255,255,0.08); }
+  50% { box-shadow: 0 8px 32px 0 rgba(255,255,255,0.18); }
+  100% { box-shadow: 0 8px 32px 0 rgba(255,255,255,0.08); }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.symbol {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #fff 60%, #bbb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+.name {
+  font-size: 1rem;
+  color: #bbb;
+  font-weight: 400;
+  margin-left: 6px;
+}
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.price {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #fff 60%, #bbb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  transition: color 0.3s;
+}
+.up {
+  color: #00ffb3;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-left: 8px;
+  transition: color 0.3s;
+  animation: upAnim 1.2s cubic-bezier(.77,0,.18,1);
+}
+.down {
+  color: #ff3c6a;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-left: 8px;
+  transition: color 0.3s;
+  animation: downAnim 1.2s cubic-bezier(.77,0,.18,1);
+}
+@keyframes upAnim {
+  from { color: #fff; }
+  to { color: #00ffb3; }
+}
+@keyframes downAnim {
+  from { color: #fff; }
+  to { color: #ff3c6a; }
+}
+.chartWrapper {
+  width: 100%;
+  height: 60px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.10) 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px 0 rgba(255,255,255,0.04);
+  animation: fadeInChart 1.2s .4s cubic-bezier(.77,0,.18,1) both;
+}
+@keyframes fadeInChart {
+  from { opacity: 0; transform: scaleX(0.8); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+@media (max-width: 900px) {
+  .grid {
+    gap: 20px;
+  }
+  .card {
+    min-width: 90vw;
+    max-width: 98vw;
+    padding: 20px 8px 16px 8px;
+  }
+  .title {
+    font-size: 2rem;
+  }
 }

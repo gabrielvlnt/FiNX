@@ -1,7 +1,10 @@
 .footer{
-    color: white;
-    height: 100px;
-    width: 100vh;
-    position: absolute;
-    bottom: 0;
+  color: white;
+  height: 100px;
+  width: 100%;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0px 0px
 }

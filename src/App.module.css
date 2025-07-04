@@ -1,3 +1,5 @@
+
+
 .content{
     height: 100vh;
     background: black !important;
@@ -5,4 +7,15 @@
     margin: 0px;
     border: none;
     display: block;
+}
+
+.maincontent{
+    background: linear-gradient(135deg, #000 0%, #222 100%);
+    padding: 0px 0px 90px 0px;
+}
+
+.footerapp{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
