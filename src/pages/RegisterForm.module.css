@@ -49,14 +49,14 @@
     background: transparent !important;
     border: none !important;
     border-bottom: 2px solid black !important;
-    color: white !important;
+    color: black !important;
     border-radius: 0 !important;
     outline: none !important;
     box-shadow: none !important;
 } 
 
 .inputCustom::placeholder {
-  color: black !important;
+  color: grey !important;
   opacity: 1 !important;
 }
 
@@ -71,5 +71,10 @@
     width: 300px;
     margin-right: 10px;
     color: white !important;
-    background-color: orange !important;
+    background-color: black !important;
+}
+
+.btnregister:hover{
+    background: #61dafb !important;
+    color: white !important;
 }

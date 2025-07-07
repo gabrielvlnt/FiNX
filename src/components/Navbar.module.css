@@ -17,10 +17,20 @@
 
 .links{
     color:white !important;
+    font-size: 18px !important;
     background-color: black !important;
+}
+
+.links:hover {
+    color: #61dafb !important;
 }
 
 .navbutton{
     color: black !important;
     background-color: white !important;
+}
+
+.navbutton:hover{
+    background: #61dafb !important;
+    color: white !important;
 }

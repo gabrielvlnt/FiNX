@@ -15,14 +15,13 @@ import {
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 const API_KEY = 'MD6LXENAIBLSO72T'
-const BASE_URL = 'https://financialmodelingprep.com/api/v3'
 
 const Home = () => {
   const [coins, setCoins] = useState([]);
 
   const fetchData = async () => {
     try {
-      const symbols = ['AAPL', 'GOOGL', 'BTC', 'DOGEUSD', 'MSFT', 'AMZN', 'TSLA', 'EURUSD']
+      const symbols = ['AAPL', 'GOOGL', 'BTCUSD', 'TSLA', 'EURUSD', 'USD']
       const responses = await Promise.all(
         symbols.map(symbol =>
           axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${API_KEY}`)

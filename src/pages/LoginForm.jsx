@@ -91,6 +91,7 @@ const Login = () => {
                     value={form.password}
                     onChange={handleChange}
                     />
+                    <div className={styles.registerbutton}> Ainda não tem uma conta? <a href="/register">Registrar-se</a></div>
                     {error && <div className={`${styles.error} my-3`}>{error}</div>} 
                     <button className={`btn mt-4 ${styles.btnlogin}`} type='submit'>Entrar</button>
                 </form>

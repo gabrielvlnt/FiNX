@@ -1,4 +1,6 @@
-
+*{
+  font-family: "Roboto Mono", monospace;
+}
 
 .content{
     height: 100vh;

@@ -1,5 +1,5 @@
 .backlogin{
-    background: black !important;
+    background: linear-gradient(135deg, #000 0%, #222 100%) !important !important;
     height: 100% !important;
 }
 
@@ -17,10 +17,14 @@
 }
 
 .loginform{
-    background: black !important;
+    background: linear-gradient(135deg, #000 0%, #222 100%) !important;
     justify-content: center;
     align-items: center;
     
+}
+
+.card{
+    border: none;
 }
 
 .titleform{
@@ -50,7 +54,7 @@
     background: transparent !important;
     border: none !important;
     border-bottom: 2px solid black !important;
-    color: white !important;
+    color: black !important;
     border-radius: 0 !important;
     outline: none !important;
     box-shadow: none !important;
@@ -58,8 +62,12 @@
 }
 
 .inputCustom::placeholder {
-  color: black !important;
+  color: grey !important;
   opacity: 1 !important;
+}
+
+input[type="password"].inputCustom {
+    color: black !important;
 }
 
 .inputCustom:focus {
@@ -69,9 +77,19 @@
   box-shadow: none !important;
 }
 
+.registerbutton{
+    font-size: 13px;
+    font-weight: 800;
+}
+
 .btnlogin{
     width: 300px;
     margin-right: 10px;
     color: white !important;
-    background-color: orange !important;
+    background-color: black !important;
+}
+
+.btnlogin:hover{
+    background: #61dafb !important;
+    color: white !important;
 }
