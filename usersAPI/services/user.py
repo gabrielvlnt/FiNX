@@ -4,7 +4,6 @@ from models.user import Users
 from schema.user import UserCreate, UserOut
 from fastapi import HTTPException, status
 from .utils import hash_password
-import os
 
 def create_user(user: UserCreate, db: Session) -> UserOut:
     user_exists = db.query(Users).filter(Users.email == user.email).first()

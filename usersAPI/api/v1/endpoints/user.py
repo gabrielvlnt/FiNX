@@ -10,7 +10,6 @@ from services.auth import authenticate_user, get_user, get_current_user
 from sqlalchemy.orm import Session
 from db.session import SessionLocal
 from datetime import timedelta, timezone
-import asyncio
 
 user_router = APIRouter(prefix='/user', tags=['user'])
 

@@ -21,7 +21,7 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      const symbols = ['AAPL', 'GOOGL', 'BTCUSD', 'TSLA', 'EURUSD', 'USD']
+      const symbols = ['AAPL', 'GOOGL', 'BTC', 'TSLA', 'EURUSD', 'USD']
       const responses = await Promise.all(
         symbols.map(symbol =>
           axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${API_KEY}`)
@@ -29,14 +29,14 @@ const Home = () => {
       )
       const newData = responses.map((response, idx) => {
         const data = response.data['Time Series (5min)'];
-        const times = Object.keys(data); // Últimos 7 intervalos
+        const times = Object.keys(data);
         console.log(times)
         const history = times.map(time => parseFloat(data[time]['4. close']));
         const latest = data[times[0]];
         const prev = data[times[1]];
         return {
           symbol: symbols[idx],
-          name: symbols[idx].includes('USD') ? symbols[idx].replace('USD', '') : symbols[idx],
+          name: symbols[idx],
           price: parseFloat(latest['4. close']),
           change: prev ? ((parseFloat(latest['4. close']) - parseFloat(prev['4. close'])) / parseFloat(prev['4. close']) * 100).toFixed(2) : '0.00',
           history: history,
