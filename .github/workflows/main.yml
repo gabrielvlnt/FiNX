@@ -2,10 +2,11 @@ name: PaymentAPI CI/CD
 on:
   push:
     branches: [main]
+    paths:
+      - 'paymentAPI/**'
   pull_request:
     branches: [main]
-  paths:
-      - 'paymentAPI/**'
+  
   workflow_dispatch:
 
 jobs:
