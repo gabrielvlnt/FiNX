@@ -22,13 +22,13 @@ jobs:
 
       - name: Start services with docker-compose
         run: |
-          docker-compose -f paymentAPI/docker-compose.yaml up -d
+          docker-compose -f docker-compose.yaml up -d
 
       - name: Run tests
         run: |
-          docker-compose -f paymentAPI/docker-compose.yaml exec -T app python -m pytest |
+          docker-compose -f docker-compose.yaml exec -T app python -m pytest |
           test_service.py
 
       - name: Stop services
         run: |
-          docker-compose -f paymentAPI/docker-compose.yaml down
+          docker-compose -f docker-compose.yaml down
