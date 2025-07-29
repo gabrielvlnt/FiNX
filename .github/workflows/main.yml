@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: payment-api
 
@@ -26,6 +26,14 @@ jobs:
           sudo curl -L "https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
           docker-compose --version
+
+      - name: List directory structure for debug
+        run: |
+          pwd
+          ls -la .
+          ls -la ./payment-api
+          ls -la ./payment-api/paymentAPI
+        working-directory: /home/runner/work/FINX
 
       - name: Start services with docker-compose
         run: |
@@ -45,7 +53,7 @@ jobs:
       - name: Debug on failure
         if: failure()
         run: |
-          ls -la ./payment-api/paymentAPI
+          ls -la .
           docker-compose -f docker-compose.yaml logs
           docker-compose -f docker-compose.yaml exec -T app ls -la /app
         working-directory: ./payment-api/paymentAPI
